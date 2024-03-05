@@ -7,6 +7,8 @@ var cors = require('cors');
 const mongoose = require('mongoose');
 const axios = require('axios'); // Import axios for making HTTP requests
 const cheerio = require('cheerio'); // Import cheerio for parsing HTML
+const CollegeMajor = require('./models/Major');
+const courseSchema = require('./models/Course');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -17,9 +19,28 @@ async function scrapeWebsite(url) {
   try {
     const response = await axios.get(url); // Make a GET request to the URL
     const $ = cheerio.load(response.data); // Load the HTML into cheerio
-    // Parse HTML and extract data
-    // Perform scraping tasks here
-    console.log($.html()); // Print the HTML content
+    
+    // Select the div with class "unit-50"
+    const unit50Div = $('div.unit-50');
+    
+    // Find all <a> tags within the div with class "unit-50"
+    const links = unit50Div.find('a');
+
+
+    // Iterate over the found <a> tags and create key-value pairs
+    links.each((index, element) => {
+      const text = $(element).text().trim(); // Get the text of the anchor tag
+      const href = $(element).attr('href'); // Get the href attribute value
+      
+      const newMajor = new CollegeMajor({
+        name: text,
+        link: href,
+        coursesInMajor: []
+      })
+
+      console.log(newMajor);
+    });
+
   } catch (error) {
     console.error('Error scraping website:', error.message);
   }
@@ -30,7 +51,7 @@ async function connect () {
   try {
       await mongoose.connect("mongodb+srv://julianbiju001:Password123@techdive.jkyexu6.mongodb.net/PatientData?retryWrites=true&w=majority");
       console.log("connected to db")
-      await scrapeWebsite("http://courses.umb.edu/course_catalog/subjects/2024%20Spring");
+      await scrapeWebsite("https://courses.umb.edu/course_catalog/subjects/2024%20Spring");
       console.log("website scraping done")
 
       
