@@ -27,22 +27,26 @@ async function scrapeWebsite(url) {
     const links = unit50Div.find('a');
 
 
-    // Iterate over the found <a> tags and create key-value pairs
+    /*
+      Code here is responsible for itearting over links (which contains all the elements with anchor tags)
+      and for each of those elements, take the text out, the link out, and put it into a new major object to be stored in our db
+    */
     links.each((index, element) => {
-      const text = $(element).text().trim(); // Get the text of the anchor tag
-      const href = $(element).attr('href'); // Get the href attribute value
+      const text = $(element).text().trim(); // Get the text of the anchor tag (Major name)
+      const href = $(element).attr('href'); // Get the href attribute value (the link)
       
       const newMajor = new CollegeMajor({
         name: text,
         link: href,
-        coursesInMajor: []
+        coursesInMajor: []  // Set to empty string for time being, will populate later
       })
 
+      // ! Once we have db set up and we have a controller function set up, pass the newMajor to the controller function to add to DB
       console.log(newMajor);
     });
 
   } catch (error) {
-    console.error('Error scraping website:', error.message);
+    console.log('Error scraping website:', error.message);
   }
 }
 
