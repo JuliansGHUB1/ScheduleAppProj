@@ -9,4 +9,4 @@ const collegeMajorSchema = new mongoose.Schema({
 
 
 
-module.exports = mongoose.model('CollegeMajor', collegeMajorSchema);
+module.exports = mongoose.model('CollegeMajor', collegeMajorSchema, 'majors');

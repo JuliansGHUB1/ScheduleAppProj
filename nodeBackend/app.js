@@ -15,7 +15,8 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-async function scrapeWebsite(url) {
+
+async function scrapeForMajors(url) {
   try {
     const response = await axios.get(url); // Make a GET request to the URL
     const $ = cheerio.load(response.data); // Load the HTML into cheerio
@@ -26,23 +27,33 @@ async function scrapeWebsite(url) {
     // Find all <a> tags within the div with class "unit-50"
     const links = unit50Div.find('a');
 
-
     /*
-      Code here is responsible for itearting over links (which contains all the elements with anchor tags)
+      Code here is responsible for iterating over links (which contains all the elements with anchor tags)
       and for each of those elements, take the text out, the link out, and put it into a new major object to be stored in our db
     */
-    links.each((index, element) => {
+    links.each(async (index, element) => {
       const text = $(element).text().trim(); // Get the text of the anchor tag (Major name)
       const href = $(element).attr('href'); // Get the href attribute value (the link)
       
-      const newMajor = new CollegeMajor({
-        name: text,
-        link: href,
-        coursesInMajor: []  // Set to empty string for time being, will populate later
-      })
+      // Check if the major already exists in the database
+      const existingMajor = await CollegeMajor.findOne({ name: text });
 
-      // ! Once we have db set up and we have a controller function set up, pass the newMajor to the controller function to add to DB
-      console.log(newMajor);
+      const courses = await scrapeForCourses(href);
+
+      if (!existingMajor) {
+        // Major doesn't exist, so create a new one and save it
+        const newMajor = new CollegeMajor({
+          name: text,
+          link: href,
+          coursesInMajor: courses  // Set to empty array for the time being, will populate later
+        });
+
+        // Save the new major to the database
+        await newMajor.save();
+        console.log(`Major ${text} added to the database.`);
+      } else {
+     //   console.log(`Major ${text} already exists in the database. Skipping.`);
+      }
     });
 
   } catch (error) {
@@ -51,13 +62,54 @@ async function scrapeWebsite(url) {
 }
 
 
+async function scrapeForCourses(url) {
+  const emptyCourseArray = [];
+  try {
+    const response = await axios.get(url); // Make a GET request to the URL
+    const $ = cheerio.load(response.data); // Load the HTML into cheerio
+    
+    // Select the div with class "unit-50"
+    const unit50Div = $('div.unit-70.content');
+    
+    // Find all <a> tags within the div with class "unit-50"
+    const links = unit50Div.find('a');
+
+    /*
+      Code here is responsible for iterating over links (which contains all the elements with anchor tags)
+      and for each of those elements, take the text out, the link out, and put it into a new major object to be stored in our db
+    */
+    links.each((index, element) => {
+      const courseName = $(element).text().trim(); // Get the text of the anchor tag (Major name)
+      const linkToCourse = $(element).attr('href'); // Get the href attribute value (the link)
+      
+      // Make the instance of this course using the schema
+      const courseInst = {
+          name: courseName,
+          link: linkToCourse,   
+      };
+
+      console.log(courseInst);
+      emptyCourseArray.push(courseInst);
+    });
+  } catch (error) {
+    console.log('Error scraping website:', error.message);
+    throw error; // Re-throw the error to be caught by the caller
+  }
+  return emptyCourseArray;
+}
+
+
+
+
 async function connect () {
   try {
       await mongoose.connect("mongodb+srv://chauduksing2:umass123@cluster0.lcwmjao.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
       console.log("connected to db")
-      await scrapeWebsite("https://courses.umb.edu/course_catalog/subjects/2024%20Spring");
+      await scrapeForMajors("https://courses.umb.edu/course_catalog/subjects/2024%20Spring");
       console.log("website scraping done")
-
+      console.log("starting to scrape for courses: accounting and finance");
+      await scrapeForCourses("https://courses.umb.edu/course_catalog/courses/ugrd_AF_2024%20Spring");
+      console.log("done");
       
   } catch (error) {
       console.log(error.message);
