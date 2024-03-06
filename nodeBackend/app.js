@@ -53,7 +53,7 @@ async function scrapeWebsite(url) {
 
 async function connect () {
   try {
-      await mongoose.connect("mongodb+srv://julianbiju001:Password123@techdive.jkyexu6.mongodb.net/PatientData?retryWrites=true&w=majority");
+      await mongoose.connect("mongodb+srv://chauduksing2:umass123@cluster0.lcwmjao.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
       console.log("connected to db")
       await scrapeWebsite("https://courses.umb.edu/course_catalog/subjects/2024%20Spring");
       console.log("website scraping done")
