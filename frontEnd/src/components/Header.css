@@ -1,0 +1,49 @@
+/* Header.css */
+
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+    position: relative; /* Add position relative to enable absolute positioning of the icon */
+}
+
+.header::before {
+    content: ''; /* Required content property for pseudo-elements */
+    display: block; /* Ensure the pseudo-element is displayed as a block */
+    width: 20px; /* Set the width of the icon */
+    height: 20px; /* Set the height of the icon */
+    background-image: url('../../public/logo192.png'); /* Set the icon as the background image */
+    background-size: cover; /* Ensure the background image covers the entire pseudo-element */
+    position: absolute; /* Position the pseudo-element absolutely within the header */
+    top: 10px; /* Position the pseudo-element 10px from the top */
+    left: 10px; /* Position the pseudo-element 10px from the left */
+    animation: spin 2s linear infinite; /* Apply the spin animation */
+}
+
+.header h1 {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.header nav ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease; /* Add transition effect */
+}
+
+.header nav ul li a:hover {
+    color: #ff8c00; /* Change color on hover */
+}

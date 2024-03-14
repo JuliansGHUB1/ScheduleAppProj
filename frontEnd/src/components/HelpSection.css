@@ -1,0 +1,29 @@
+/* HelpSection.css */
+
+section {
+    padding: 20px;
+  }
+  
+  .faq-list {
+    margin-top: 20px;
+    padding: 0;
+    list-style-type: none; /* Remove bullet points from FAQ list */
+  }
+  
+  .faq-item {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc; /* Add a horizontal line between FAQ items */
+    padding-bottom: 15px; /* Add space between items */
+  }
+  
+  .faq-question {
+    font-size: 1.2rem;
+    margin-bottom: 10px; /* Increase space between question and answer */
+    color: #333; /* Change question text color */
+  }
+  
+  .faq-answer {
+    margin-top: 5px;
+    color: #666;
+  }
+  

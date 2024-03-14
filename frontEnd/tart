@@ -1,0 +1,217 @@
+[1mdiff --git a/package-lock.json b/package-lock.json[m
+[1mindex 0a3c609..4b56d94 100644[m
+[1m--- a/package-lock.json[m
+[1m+++ b/package-lock.json[m
+[36m@@ -11,6 +11,7 @@[m
+         "@testing-library/jest-dom": "^5.17.0",[m
+         "@testing-library/react": "^13.4.0",[m
+         "@testing-library/user-event": "^13.5.0",[m
+[32m+[m[32m        "axios": "^1.6.7",[m
+         "react": "^18.2.0",[m
+         "react-dom": "^18.2.0",[m
+         "react-router-dom": "^6.22.3",[m
+[36m@@ -5476,6 +5477,29 @@[m
+         "node": ">=4"[m
+       }[m
+     },[m
+[32m+[m[32m    "node_modules/axios": {[m
+[32m+[m[32m      "version": "1.6.7",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/axios/-/axios-1.6.7.tgz",[m
+[32m+[m[32m      "integrity": "sha512-/hDJGff6/c7u0hDkvkGxR/oy6CbCs8ziCsC7SqmhjfozqiJGc8Z11wrv9z9lYfY4K8l+H9TpjcMDX0xOZmx+RA==",[m
+[32m+[m[32m      "dependencies": {[m
+[32m+[m[32m        "follow-redirects": "^1.15.4",[m
+[32m+[m[32m        "form-data": "^4.0.0",[m
+[32m+[m[32m        "proxy-from-env": "^1.1.0"[m
+[32m+[m[32m      }[m
+[32m+[m[32m    },[m
+[32m+[m[32m    "node_modules/axios/node_modules/form-data": {[m
+[32m+[m[32m      "version": "4.0.0",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/form-data/-/form-data-4.0.0.tgz",[m
+[32m+[m[32m      "integrity": "sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==",[m
+[32m+[m[32m      "dependencies": {[m
+[32m+[m[32m        "asynckit": "^0.4.0",[m
+[32m+[m[32m        "combined-stream": "^1.0.8",[m
+[32m+[m[32m        "mime-types": "^2.1.12"[m
+[32m+[m[32m      },[m
+[32m+[m[32m      "engines": {[m
+[32m+[m[32m        "node": ">= 6"[m
+[32m+[m[32m      }[m
+[32m+[m[32m    },[m
+     "node_modules/axobject-query": {[m
+       "version": "3.2.1",[m
+       "resolved": "https://registry.npmjs.org/axobject-query/-/axobject-query-3.2.1.tgz",[m
+[36m@@ -14742,6 +14766,11 @@[m
+         "node": ">= 0.10"[m
+       }[m
+     },[m
+[32m+[m[32m    "node_modules/proxy-from-env": {[m
+[32m+[m[32m      "version": "1.1.0",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/proxy-from-env/-/proxy-from-env-1.1.0.tgz",[m
+[32m+[m[32m      "integrity": "sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg=="[m
+[32m+[m[32m    },[m
+     "node_modules/psl": {[m
+       "version": "1.9.0",[m
+       "resolved": "https://registry.npmjs.org/psl/-/psl-1.9.0.tgz",[m
+[1mdiff --git a/package.json b/package.json[m
+[1mindex fb5cb4e..1c0b3e3 100644[m
+[1m--- a/package.json[m
+[1m+++ b/package.json[m
+[36m@@ -6,6 +6,7 @@[m
+     "@testing-library/jest-dom": "^5.17.0",[m
+     "@testing-library/react": "^13.4.0",[m
+     "@testing-library/user-event": "^13.5.0",[m
+[32m+[m[32m    "axios": "^1.6.7",[m
+     "react": "^18.2.0",[m
+     "react-dom": "^18.2.0",[m
+     "react-router-dom": "^6.22.3",[m
+[1mdiff --git a/src/App.js b/src/App.js[m
+[1mindex 95a9755..744f46f 100644[m
+[1m--- a/src/App.js[m
+[1m+++ b/src/App.js[m
+[36m@@ -1,5 +1,5 @@[m
+ import React from 'react';[m
+[31m-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';[m
+[32m+[m[32mimport { BrowserRouter as Router, Route, Routes } from 'react-router-dom';[m
+ import Header from './components/Header';[m
+ import FormSection from './components/FormSection';[m
+ import ResponseSection from './components/ResponseSection';[m
+[36m@@ -8,20 +8,20 @@[m [mimport SchedulePage from './pages/SchedulePage';[m
+ import AllSchedulesPage from './pages/AllSchedulesPage';[m
+ [m
+ function App() {[m
+[31m-  return ([m
+[32m+[m[32m return ([m
+     <Router>[m
+       <div className="App">[m
+         <Header />[m
+[31m-        <Switch>[m
+[31m-        <Route path="/" exact component={FormSection} />[m
+[31m-          <Route path="/help" component={HelpSection} />[m
+[31m-          <Route path="/response" component={ResponseSection} />[m
+[31m-          <Route path="/all-schedules" component={AllSchedulesPage} />[m
+[31m-          <Route path="/schedule/" component={SchedulePage} />[m
+[31m-        </Switch>[m
+[32m+[m[32m        <Routes>[m
+[32m+[m[32m          <Route path="/" element={<FormSection />} />[m
+[32m+[m[32m          <Route path="/help" element={<HelpSection />} />[m
+[32m+[m[32m          <Route path="/response" element={<ResponseSection />} />[m
+[32m+[m[32m          <Route path="/all-schedules" element={<AllSchedulesPage />} />[m
+[32m+[m[32m          <Route path="/schedule/" element={<SchedulePage />} />[m
+[32m+[m[32m        </Routes>[m
+       </div>[m
+     </Router>[m
+[31m-  );[m
+[32m+[m[32m );[m
+ }[m
+ [m
+ export default App;[m
+[1mdiff --git a/src/components/FormSection.js b/src/components/FormSection.js[m
+[1mindex e2730ef..4cc397a 100644[m
+[1m--- a/src/components/FormSection.js[m
+[1m+++ b/src/components/FormSection.js[m
+[36m@@ -1,12 +1,84 @@[m
+[31m-import React from 'react';[m
+[32m+[m[32mimport React, { useState } from 'react';[m
+[32m+[m[32mimport { useNavigate } from 'react-router-dom';[m
+[32m+[m[32mimport axios from 'axios';[m
+[32m+[m[32mimport './FormSection.css';[m
+[32m+[m
+[32m+[m[32mfunction FormSection() {[m[41m [m
+[32m+[m[32m    const [formData, setFormData] = useState({[m
+[32m+[m[32m        monStartTime: "",[m
+[32m+[m[32m        monEndTime: "",[m
+[32m+[m[32m        tueStartTime: "",[m
+[32m+[m[32m        tueEndTime: "",[m
+[32m+[m[32m        wedStartTime: "",[m
+[32m+[m[32m        wedEndTime: "",[m
+[32m+[m[32m        thurStartTime: "",[m
+[32m+[m[32m        thurEndTime: "",[m
+[32m+[m[32m        friStartTime: "",[m
+[32m+[m[32m        friEndTime: "",[m
+[32m+[m[32m    });[m
+[32m+[m
+[32m+[m[32m    const handleChange = (e) => {[m
+[32m+[m[32m        const { name, value } = e.target;[m
+[32m+[m[32m        setFormData({[m
+[32m+[m[32m            ...formData,[m
+[32m+[m[32m            [name]: value,[m
+[32m+[m[32m        });[m
+[32m+[m[32m    };[m
+[32m+[m[41m    [m
+[32m+[m[32m    console.log("This is the form data: ");[m
+[32m+[m[32m    console.log(formData);[m
+[32m+[m[32m    const navigate = useNavigate();[m
+[32m+[m
+[32m+[m[32m    const handleSubmit = async (e) => {[m
+[32m+[m[32m        e.preventDefault();[m
+[32m+[m[32m        try {[m
+[32m+[m[32m            const response = await axios.post('http://localhost:9000/exam', formData);[m
+[32m+[m[32m            console.log("we have received the request");[m
+[32m+[m[32m            console.log(response.data);[m
+[32m+[m[32m            navigate('/admin');[m
+[32m+[m[32m        } catch(error) {[m
+[32m+[m[32m            console.log('Failed to add exam:', error);[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+ [m
+[31m-function FormSection(){[m
+     return ([m
+[31m-        <section>[m
+[31m-            {/* Your response content here */}[m
+[31m-            <h2> Form section</h2>[m
+[31m-        </section>[m
+[32m+[m[32m        <form onSubmit={handleSubmit}>[m
+[32m+[m[32m            <div className="form-group">[m
+[32m+[m[32m                <label htmlFor="monStartTime">Monday Start Time:</label>[m
+[32m+[m[32m                <input name="monStartTime" id="monStartTime" type="time" value={formData.monStartTime} onChange={handleChange} placeholder="Monday Start Time" />[m
+[32m+[m[32m                <label htmlFor="monEndTime">Monday End Time:</label>[m
+[32m+[m[32m                <input name="monEndTime" id="monEndTime" type="time" value={formData.monEndTime} onChange={handleChange} placeholder="Monday End Time" />[m
+[32m+[m[32m            </div>[m
+[32m+[m[32m            <div className="form-group">[m
+[32m+[m[32m                <label htmlFor="tueStartTime">Tuesday Start Time:</label>[m
+[32m+[m[32m                <input name="tueStartTime" id="tueStartTime" type="time" value={formData.tueStartTime} onChange={handleChange} placeholder="Tuesday Start Time" />[m
+[32m+[m[32m                <label htmlFor="tueEndTime">Tuesday End Time:</label>[m
+[32m+[m[32m                <input name="tueEndTime" id="tueEndTime" type="time" value={formData.tueEndTime} onChange={handleChange} placeholder="Tuesday End Time" />[m
+[32m+[m[32m            </div>[m
+[32m+[m[32m            <div className="form-group">[m
+[32m+[m[32m                <label htmlFor="wedStartTime">Wednesday Start Time:</label>[m
+[32m+[m[32m                <input name="wedStartTime" id="wedStartTime" type="time" value={formData.wedStartTime} onChange={handleChange} placeholder="Wednesday Start Time" />[m
+[32m+[m[32m                <label htmlFor="wedEndTime">Wednesday End Time:</label>[m
+[32m+[m[32m                <input name="wedEndTime" id="wedEndTime" type="time" value={formData.wedEndTime} onChange={handleChange} placeholder="Wednesday End Time" />[m
+[32m+[m[32m            </div>[m
+[32m+[m[32m            <div className="form-group">[m
+[32m+[m[32m                <label htmlFor="thurStartTime">Thursday Start Time:</label>[m
+[32m+[m[32m                <input name="thurStartTime" id="thurStartTime" type="time" value={formData.thurStartTime} onChange={handleChange} placeholder="Thursday Start Time" />[m
+[32m+[m[32m                <label htmlFor="thurEndTime">Thursday End Time:</label>[m
+[32m+[m[32m                <input name="thurEndTime" id="thurEndTime" type="time" value={formData.thurEndTime} onChange={handleChange} placeholder="Thursday End Time" />[m
+[32m+[m[32m            </div>[m
+[32m+[m[32m            <div className="form-group">[m
+[32m+[m[32m                <label htmlFor="friStartTime">Friday Start Time:</label>[m
+[32m+[m[32m                <input name="friStartTime" id="friStartTime" type="time" value={formData.friStartTime} onChange={handleChange} placeholder="Friday Start Time" />[m
+[32m+[m[32m                <label htmlFor="friEndTime">Friday End Time:</label>[m
+[32m+[m[32m                <input name="friEndTime" id="friEndTime" type="time" value={formData.friEndTime} onChange={handleChange} placeholder="Friday End Time" />[m
+[32m+[m[32m            </div>[m
+[32m+[m
+[32m+[m[32m            <div className="submitContainer">[m
+[32m+[m[32m                <button type="submit">Submit</button>[m
+[32m+[m[32m            </div>[m
+[32m+[m[32m        </form>[m[41m [m
+     );[m
+ }[m
+ [m
+[31m-export default FormSection;[m
+\ No newline at end of file[m
+[32m+[m[32mexport default FormSection;[m
+[1mdiff --git a/src/components/Header.js b/src/components/Header.js[m
+[1mindex ac65960..9d99d28 100644[m
+[1m--- a/src/components/Header.js[m
+[1m+++ b/src/components/Header.js[m
+[36m@@ -4,7 +4,7 @@[m [mfunction Header(){[m
+     return ([m
+         <header>[m
+             {/* Your response content here */}[m
+[31m-            <h1> Testing header</h1>[m
+[32m+[m[32m            <h1> UMB Schedule Planner </h1>[m
+         </header>[m
+     );[m
+ }[m
