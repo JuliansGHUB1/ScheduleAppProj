@@ -8,6 +8,7 @@ import SchedulePage from './pages/SchedulePage';
 import AllSchedulesPage from './pages/AllSchedulesPage';
 import DelTest from './components/DelTest';
 import Footer from './components/Footer';
+import ClassForm from './components/ClassForm';
 
 function App() {
  return (
@@ -16,6 +17,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<FormSection />} />
+          <Route path="/ClassForm" element={<ClassForm />} />
           <Route path = "/test" element = {<DelTest/>}/>
           <Route path="/help" element={<HelpSection />} />
           <Route path="/response" element={<ResponseSection />} />
