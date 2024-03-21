@@ -9,8 +9,8 @@ function Header() {
       <h1>UMB Class Scheduler</h1>
       <nav>
         <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/test">(fakeTest)</Link></li>
+          <li><Link to="/">classesForm</Link></li>
+          <li><Link to="/TimeForm">(TimeForm)</Link></li>
           <li><Link to="/help">Help</Link></li>
           <li><Link to="/response">Response</Link></li>
           <li><Link to="/all-schedules">All Schedules</Link></li>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './DelTest.css';
 
-function DelTest() { 
+function TimeForm() { 
     const [formData, setFormData] = useState({
         monStartTime: "",
         monEndTime: "",
@@ -94,4 +94,4 @@ function DelTest() {
     );
 }
 
-export default DelTest;
+export default TimeForm;
