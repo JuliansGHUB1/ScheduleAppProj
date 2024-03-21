@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function ClassForm() {
  const [majors, setMajors] = useState([]);
  const [classes, setClasses] = useState([]);
  const [selectedMajor, setSelectedMajor] = useState('');
  const [selectedClass, setSelectedClass] = useState('');
- const [selectedClasses, setSelectedClasses] = useState([]); // State to hold selected classes
+ const [selectedClasses, setSelectedClasses] = useState([]);
+ const [errorMessage, setErrorMessage] = useState(''); // State for error message
 
  useEffect(() => {
     fetch('http://localhost:9000/major')
@@ -25,7 +27,7 @@ function ClassForm() {
 
  const handleMajorChange = (event) => {
     setSelectedMajor(event.target.value);
-    setClasses([]); // Clear classes when major changes
+    setClasses([]);
  };
 
  const handleClassChange = (event) => {
@@ -34,17 +36,27 @@ function ClassForm() {
 
  const handleSubmit = (event) => {
     event.preventDefault();
-    // Add the selected class to the selectedClasses state
+    if (selectedClass === '') {
+      setErrorMessage('Please select a class before submitting.');
+      return;
+    }
     setSelectedClasses([...selectedClasses, { id: selectedClasses.length, name: selectedClass }]);
-    // Reset the form
-    setSelectedMajor('');
     setSelectedClass('');
-    setClasses([]);
+    setErrorMessage(''); // Clear the error message after successful submission
  };
 
  const handleRemoveClass = (id) => {
-    // Remove the class with the given id from the selectedClasses state
     setSelectedClasses(selectedClasses.filter(classItem => classItem.id !== id));
+ };
+
+ const handleSendToBackend = () => {
+    axios.post('http://localhost:9000/saveSelectedClasses', { selectedClasses })
+      .then(response => {
+        console.log('Data sent to backend successfully:', response.data);
+      })
+      .catch(error => {
+        console.error('Error sending data to backend:', error);
+      });
  };
 
  return (
@@ -56,6 +68,8 @@ function ClassForm() {
           </div>
         ))}
       </div>
+      {/* Display the error message */}
+      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="majorDropdown">Select a Major:</label>
@@ -76,6 +90,7 @@ function ClassForm() {
           </select>
         </div>
         <button type="submit">Submit</button>
+        <button type="button" onClick={handleSendToBackend}>Send to Backend</button>
       </form>
     </>
  );
