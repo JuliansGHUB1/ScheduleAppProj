@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
+import './FORMforTime.css'
 
 // Create a localizer using moment
 const localizer = momentLocalizer(moment);
