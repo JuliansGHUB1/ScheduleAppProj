@@ -6,9 +6,11 @@ import ResponseSection from './components/ResponseSection';
 import HelpSection from './components/HelpSection';
 import SchedulePage from './pages/SchedulePage';
 import AllSchedulesPage from './pages/AllSchedulesPage';
-import TimeForm from './components/FormTime';
 import Footer from './components/Footer';
-import ClassForm from './components/FormClasses';
+
+import ClassForm from './components/FORMforClass';
+import TimeForm from './components/FORMforTime';
+
 
 function App() {
  return (
