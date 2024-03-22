@@ -6,7 +6,7 @@ import ResponseSection from './components/ResponseSection';
 import HelpSection from './components/HelpSection';
 import SchedulePage from './pages/SchedulePage';
 import AllSchedulesPage from './pages/AllSchedulesPage';
-import Footer from './components/Footer';
+
 
 import ClassForm from './components/FORMforClass';
 import TimeForm from './components/FORMforTime';
@@ -25,7 +25,6 @@ function App() {
           <Route path="/all-schedules" element={<AllSchedulesPage />} />
           <Route path="/schedule/" element={<SchedulePage />} />
         </Routes>
-        <Footer />
       </div>
     </Router>
  );
