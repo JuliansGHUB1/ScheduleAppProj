@@ -140,3 +140,26 @@ form {
        cursor: not-allowed;
    }
    
+   h3 {
+    font-size: 24px; /* Adjust font size */
+    color: #333; /* Adjust text color */
+   }
+
+/* Style for the wrapper container */
+.file-upload-wrapper {
+    display: flex; /* Use Flexbox */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: flex-start; /* Align children to the start of the container */
+    align-items: center; /* Center children horizontally */
+    height: 100vh; /* Full viewport height */
+    width: 100%; /* Full viewport width */
+}
+
+/* Style for the h3 element */
+.file-upload-wrapper h3 {
+    font-size: 24px; /* Adjust font size */
+    color: #333; /* Adjust text color */
+    margin-bottom: 20px; /* Add some space below the h3 for separation */
+}
+
+   

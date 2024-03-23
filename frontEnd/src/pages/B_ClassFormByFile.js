@@ -38,18 +38,21 @@ const FileUpload = () => {
  };
 
  return (
-    <div className="file-upload-container">
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Update</button>
-    {/* Loading indicator */}
-    {isLoading && (
-        <div className="spinner-container">
-          <div className="spinner"></div>
-        </div>
-      )}
-    </div>
-
+  <div className="file-upload-wrapper">
+     <h3>Submit your Degree Audit!</h3>
+     <div className="file-upload-container">
+       <input type="file" onChange={handleFileChange} />
+       <button onClick={handleUpload}>Update</button>
+       {/* Loading indicator */}
+       {isLoading && (
+         <div className="spinner-container">
+           <div className="spinner"></div>
+         </div>
+       )}
+     </div>
+  </div>
  );
+ 
 };
 
 export default FileUpload;
