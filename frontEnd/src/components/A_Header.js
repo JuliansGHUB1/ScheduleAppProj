@@ -13,7 +13,7 @@ function Header() {
           <li><Link to="/degreeAudit">(ClassesByDegreeAudit)</Link></li>
           <li><Link to="/TimeForm">(TimeForm)</Link></li>
           <li><Link to="/help">Help</Link></li>
-          <li><Link to="/all-schedules">(...)</Link></li>
+          <li><Link to="/all-schedules">(...NOTES...)</Link></li>
           <li><Link to="/schedule">(...)</Link></li>
         </ul>
       </nav>

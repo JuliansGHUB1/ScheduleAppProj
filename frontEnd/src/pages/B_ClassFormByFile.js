@@ -20,7 +20,7 @@ const FileUpload = () => {
     const formData = new FormData();
     formData.append('file', selectedFile);
 
-    fetch('YOUR_BACKEND_ENDPOINT', {
+    fetch('http://localhost:9000/degreeAudit', {
       method: 'POST',
       body: formData,
     })

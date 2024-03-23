@@ -15,7 +15,7 @@ function ContactMeFooter() {
  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://yourbackend.com/send-email', formData);
+      const response = await axios.post('https://localhost:9000/sentEmails', formData);
       console.log(response.data);
       // Optionally, clear the form or show a success message
       setFormData({ name: '', email: '', message: '' });

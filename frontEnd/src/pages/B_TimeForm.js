@@ -21,12 +21,16 @@ function TimeForm() {
  }, []);
 
  const handleSelectSlot = useCallback(
+
     ({ start, end }) => {
-      const title = window.prompt('New Event Name');
-      if (title) {
+      const _2ndStart = moment(start).format('dddd, h:mm A');
+      const _2ndEnd = moment(end).format('dddd, h:mm A');
+      const userIsSure = window.confirm(`Are you sure of this time?\n\nStart: ${_2ndStart}\nEnd: ${_2ndEnd}`);
+      if (userIsSure) {
+        // prev is an array
         setEvents((prev) => [
           ...prev,
-          { id: prev.length, start, end, title },
+          { id: prev.length, start, end },
         ]);
       }
     },
@@ -43,7 +47,7 @@ function TimeForm() {
     },
     [deleteEvent] // Ensure deleteEvent is listed as a dependency
  );
-
+/*
  const handleSendToBackend = useCallback(() => {
     setIsLoading(true);
     axios.post('http://localhost:9000/saveEvents', { events: myEvents })
@@ -55,7 +59,39 @@ function TimeForm() {
         console.error('Error sending events to backend:', error);
         setIsLoading(false);
       });
- }, [myEvents]);
+ }, [myEvents]);*/
+
+/*
+This converts
+        start: new Date(2023, 0, 2, 14, 0), 
+        end: new Date(2023, 0, 2, 15, 0),
+      To
+        start: "Sunday, 09:00",
+        end: "10:00"
+      
+*/
+ const handleSendToBackend = useCallback(() => {
+  setIsLoading(true);
+
+  // Create a new array of events with formatted start and end times
+  const formattedEvents = myEvents.map(event => ({
+      ...event,
+      start: moment(event.start).format('dddd, HH:mm'),
+      end: moment(event.end).format('dddd, HH:mm'),
+  }));
+
+  // Send the formatted events to the backend
+  axios.post('http://localhost:9000/sentTimes', { events: formattedEvents })
+      .then(response => {
+          console.log('Events sent to backend successfully:', response.data);
+          setIsLoading(false);
+      })
+      .catch(error => {
+          console.error('Error sending events to backend:', error);
+          setIsLoading(false);
+      });
+}, [myEvents]);
+
 
  useEffect(() => {
   console.log(myEvents);
@@ -69,7 +105,8 @@ function TimeForm() {
         Please go click and drag slowly, bugs if you do it too fast 🥺.
       </div>
       <Calendar
-        defaultDate={new Date(2015, 3, 12)}
+      // Why 2023? Seems that there's a specific way of how they store dates. Like if you put 2024, the first day of the calender is 31th of the previous year ... Think it's best to keep a 2023 for starting at 1
+        defaultDate={new Date(2023, 0, 1)}
         defaultView={Views.WEEK}
         events={myEvents}
         localizer={localizer}
@@ -78,6 +115,7 @@ function TimeForm() {
         selectable
         scrollToTime={new Date(1970, 1, 1, 6)}
         toolbar={false}
+        // dont worry about 1970, seems to be perfectly alright
         min={new Date(1970, 1, 1, 8)} // Start at 8 AM
         max={new Date(1970, 1, 1, 23)} // End at 8 PM
       />

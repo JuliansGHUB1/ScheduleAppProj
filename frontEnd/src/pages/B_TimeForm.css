@@ -18,8 +18,11 @@
   border: 2px solid #101113;
   border-radius: 5px;
   margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
   background-color: #939292;
   }  
+
 
   .spinner {
     border: 4px solid rgba(0, 0, 0, 0.1);

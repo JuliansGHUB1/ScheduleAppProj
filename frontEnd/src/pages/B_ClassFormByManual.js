@@ -61,7 +61,7 @@ function ClassForm() {
 
  const handleSendToBackend = () => {
   setIsLoading(true); // Set loading to true at the beginning
-  axios.post('http://localhost:9000/saveSelectedClasses', { selectedClasses })
+  axios.post('http://localhost:9000/sentClasses', { selectedClasses })
      .then(response => {
        console.log('Data sent to backend successfully:', response.data);
        setIsLoading(false); // Set loading to false after success
