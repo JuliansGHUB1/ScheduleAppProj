@@ -73,7 +73,7 @@ function TimeForm() {
         selectable
         scrollToTime={new Date(1970, 1, 1, 6)}
       />
-      <button onClick={handleSendToBackend}>Send to Backend</button>
+      <button onClick={handleSendToBackend}>Update</button>
     </div>
  );
 }

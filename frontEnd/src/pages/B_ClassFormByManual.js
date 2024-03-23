@@ -9,6 +9,7 @@ function ClassForm() {
  const [selectedClass, setSelectedClass] = useState('');
  const [selectedClasses, setSelectedClasses] = useState([]);
  const [errorMessage, setErrorMessage] = useState(''); // State for error message
+ const [isLoading, setIsLoading] = useState(false);
 
  useEffect(() => {
     fetch('http://localhost:9000/major')
@@ -59,14 +60,18 @@ function ClassForm() {
  };
 
  const handleSendToBackend = () => {
-    axios.post('http://localhost:9000/saveSelectedClasses', { selectedClasses })
-      .then(response => {
-        console.log('Data sent to backend successfully:', response.data);
-      })
-      .catch(error => {
-        console.error('Error sending data to backend:', error);
-      });
+  setIsLoading(true); // Set loading to true at the beginning
+  axios.post('http://localhost:9000/saveSelectedClasses', { selectedClasses })
+     .then(response => {
+       console.log('Data sent to backend successfully:', response.data);
+       setIsLoading(false); // Set loading to false after success
+     })
+     .catch(error => {
+       console.error('Error sending data to backend:', error);
+       setIsLoading(false); // Set loading to false after error
+     });
  };
+ 
 
  return (
     <>
@@ -98,9 +103,11 @@ function ClassForm() {
             ))}
           </select>
         </div>
-        <button type="submit">Submit</button>
-        <button type="button" onClick={handleSendToBackend}>Send to Backend</button>
+        <button type="submit">Add</button>
+        <button type="button" onClick={handleSendToBackend}>Update</button>
       </form>
+    {/* Loading indicator */}
+    {isLoading && <div>Loading...</div>}
     </>
  );
 }

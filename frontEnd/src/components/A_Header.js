@@ -9,12 +9,12 @@ function Header() {
       <h1>UMB Class Scheduler</h1>
       <nav>
         <ul>
-          <li><Link to="/">(ClassesForm)</Link></li>
+          <li><Link to="/">(ClassesByForm)</Link></li>
+          <li><Link to="/degreeAudit">(ClassesByDegreeAudit)</Link></li>
           <li><Link to="/TimeForm">(TimeForm)</Link></li>
           <li><Link to="/help">Help</Link></li>
-          <li><Link to="/response">Response</Link></li>
-          <li><Link to="/all-schedules">All Schedules</Link></li>
-          <li><Link to="/schedule">Schedule</Link></li>
+          <li><Link to="/all-schedules">(...)</Link></li>
+          <li><Link to="/schedule">(...)</Link></li>
         </ul>
       </nav>
     </div>
