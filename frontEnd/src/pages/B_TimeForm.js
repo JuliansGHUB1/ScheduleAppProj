@@ -2,13 +2,15 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
-import './FORMforTime.css';
+import './B_TimeForm.css';
 import axios from 'axios';
 
 // Create a localizer using moment
 const localizer = momentLocalizer(moment);
 
 function TimeForm() {
+
+  
  const [myEvents, setEvents] = useState([]);
  const [selectedEvent, setSelectedEvent] = useState(null);
 
@@ -52,8 +54,8 @@ function TimeForm() {
  }, [myEvents]);
 
  useEffect(() => {
-    console.log(myEvents);
- }, [myEvents]);
+  console.log(myEvents);
+}, [myEvents]);
 
  return (
     <div className="height800">

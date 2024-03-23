@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Footer() {
+function ContactMeFooter() {
   return (
     <section id="contact">
       <h2>Contact Me</h2>
@@ -24,4 +24,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default ContactMeFooter;

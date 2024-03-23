@@ -1,6 +1,6 @@
 import React from 'react';
-import './HelpSection.css';
-import Footer from './Footer';
+import './C_HelpSection.css';
+import ContactMeFooter from '../components/Z_ContactMeFooter';
 
 function HelpSection() {
   return (
@@ -21,7 +21,8 @@ function HelpSection() {
         </div>
         {/* Add more FAQ items as needed */}
       </div>
-      <Footer />
+      <ContactMeFooter />
+      
     </section>
   );
 }

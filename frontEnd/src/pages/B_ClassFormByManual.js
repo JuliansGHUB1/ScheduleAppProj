@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './B_ClassFormByManual.css'
 
 function ClassForm() {
  const [majors, setMajors] = useState([]);

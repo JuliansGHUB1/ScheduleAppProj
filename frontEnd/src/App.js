@@ -1,15 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
-import FormSection from './components/FormSection';
-import ResponseSection from './components/ResponseSection';
-import HelpSection from './components/HelpSection';
-import SchedulePage from './pages/SchedulePage';
-import AllSchedulesPage from './pages/AllSchedulesPage';
-
-
-import ClassForm from './components/FORMforClass';
-import TimeForm from './components/FORMforTime';
+import Header from './components/A_Header';
+import ResponseSection from './pages/B_ClassFormByFile';
+import HelpSection from './pages/C_HelpSection';
+import SchedulePage from './pages/X_SchedulePage';
+import AllSchedulesPage from './pages/X_AllSchedulesPage';
+import ClassForm from './pages/B_ClassFormByManual';
+import TimeForm from './pages/B_TimeForm';
 
 
 function App() {
