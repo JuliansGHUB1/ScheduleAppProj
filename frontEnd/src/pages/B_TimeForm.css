@@ -1,6 +1,25 @@
-.rbc-toolbar button {
-    display: none !important;
-  }
+
+/*Interestingly enough, default button type is used by the date headers ... gonna use a className to avoid it*/
+.UpdateButton{
+  width: 10%; 
+  padding: 10px;
+  background-color: rgb(148, 150, 149); /* Button color */
+  color: white; /* Text color */
+  border: none;
+  border-radius: 4px; 
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 20px; /* Larger font size */
+}
+.plead-message {
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #111111;
+  padding: 10px;
+  border: 2px solid #101113;
+  border-radius: 5px;
+  margin-left: 20px;
+  background-color: #939292;
+  }  
 
   .spinner {
     border: 4px solid rgba(0, 0, 0, 0.1);

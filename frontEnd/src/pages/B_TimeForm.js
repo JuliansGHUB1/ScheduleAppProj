@@ -8,9 +8,9 @@ import axios from 'axios';
 // Create a localizer using moment
 const localizer = momentLocalizer(moment);
 
+
 function TimeForm() {
 
-  
  const [myEvents, setEvents] = useState([]);
  const [selectedEvent, setSelectedEvent] = useState(null);
  const [isLoading, setIsLoading] = useState(false);
@@ -65,8 +65,8 @@ function TimeForm() {
   <div>
     <div className="height800">
       {/* Add a message at the top */}
-      <div style={{ marginBottom: '20px', fontSize: '18px', color: 'red' }}>
-        Please go slowly, bugs if you do it too fast.
+      <div className="plead-message">
+        Please go click and drag slowly, bugs if you do it too fast 🥺.
       </div>
       <Calendar
         defaultDate={new Date(2015, 3, 12)}
@@ -77,8 +77,9 @@ function TimeForm() {
         onSelectSlot={handleSelectSlot}
         selectable
         scrollToTime={new Date(1970, 1, 1, 6)}
+        toolbar={false}
       />
-      <button onClick={handleSendToBackend}>Update</button>
+      <button className="UpdateButton" onClick={handleSendToBackend}>Update</button>
     </div>
     {/* Loading indicator */}
     {isLoading && (

@@ -10,7 +10,7 @@ function HelpSection() {
         <div className="faq-item">
           <h3 className="faq-question"><p>🚧 This section is under construction. 🚧</p>
 </h3>
-          <p className="faq-answer">😀</p>
+          <p className="faq-answer">😀 </p>
         </div>
         <div className="faq-item">
           <h3 className="faq-question">(...)</h3>
