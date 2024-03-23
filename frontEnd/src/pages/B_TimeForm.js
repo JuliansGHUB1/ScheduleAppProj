@@ -78,6 +78,8 @@ function TimeForm() {
         selectable
         scrollToTime={new Date(1970, 1, 1, 6)}
         toolbar={false}
+        min={new Date(1970, 1, 1, 8)} // Start at 8 AM
+        max={new Date(1970, 1, 1, 23)} // End at 8 PM
       />
       <button className="UpdateButton" onClick={handleSendToBackend}>Update</button>
     </div>
