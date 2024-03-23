@@ -13,6 +13,7 @@ function TimeForm() {
   
  const [myEvents, setEvents] = useState([]);
  const [selectedEvent, setSelectedEvent] = useState(null);
+ const [isLoading, setIsLoading] = useState(false);
 
  // Define deleteEvent first
  const deleteEvent = useCallback((id) => {
@@ -44,12 +45,15 @@ function TimeForm() {
  );
 
  const handleSendToBackend = useCallback(() => {
+    setIsLoading(true);
     axios.post('http://localhost:9000/saveEvents', { events: myEvents })
       .then(response => {
         console.log('Events sent to backend successfully:', response.data);
+        setIsLoading(false);
       })
       .catch(error => {
         console.error('Error sending events to backend:', error);
+        setIsLoading(false);
       });
  }, [myEvents]);
 
@@ -58,6 +62,7 @@ function TimeForm() {
 }, [myEvents]);
 
  return (
+  <div>
     <div className="height800">
       {/* Add a message at the top */}
       <div style={{ marginBottom: '20px', fontSize: '18px', color: 'red' }}>
@@ -75,7 +80,22 @@ function TimeForm() {
       />
       <button onClick={handleSendToBackend}>Update</button>
     </div>
+    {/* Loading indicator */}
+    {isLoading && (
+      <div className="spinner-container">
+        <div className="spinner"></div>
+      </div>
+    )}
+    </div>
  );
 }
+
+// testing performances of animation
+/*const handleSendToBackend = () => {
+  setIsLoading(true); // Set loading to true at the beginning
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 5000)
+ };*/
 
 export default TimeForm;

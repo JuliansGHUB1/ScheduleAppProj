@@ -71,7 +71,9 @@ function ClassForm() {
        setIsLoading(false); // Set loading to false after error
      });
  };
+
  
+
 
  return (
     <>
@@ -107,7 +109,11 @@ function ClassForm() {
         <button type="button" onClick={handleSendToBackend}>Update</button>
       </form>
     {/* Loading indicator */}
-    {isLoading && <div>Loading...</div>}
+    {isLoading && (
+      <div className="spinner-container">
+        <div className="spinner"></div>
+      </div>
+    )}
     </>
  );
 }
