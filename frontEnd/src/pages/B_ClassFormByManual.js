@@ -110,12 +110,12 @@ function ClassForm() {
       </form>
     {/* Loading indicator */}
     {isLoading && (
-      <div className="spinner-container">
-        <div className="spinner"></div>
-      </div>
-    )}
+  <div className="spinner-container">
+    <img src="/Capture.JPG" alt="Loading..." className="custom-spinner" />
+  </div>)}
     </>
  );
 }
 
 export default ClassForm;
+

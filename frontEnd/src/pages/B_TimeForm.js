@@ -124,13 +124,13 @@ This converts
     {/* Loading indicator */}
     {isLoading && (
       <div className="spinner-container">
-        <div className="spinner"></div>
-      </div>
-    )}
+        <img src="/logo512.png" alt="Loading..." className="custom-spinner" />
+      </div>)}
     </div>
- );
-}
 
+ );}
+
+ export default TimeForm;
 // testing performances of animation
 /*const handleSendToBackend = () => {
   setIsLoading(true); // Set loading to true at the beginning
@@ -139,4 +139,4 @@ This converts
   }, 5000)
  };*/
 
-export default TimeForm;
+

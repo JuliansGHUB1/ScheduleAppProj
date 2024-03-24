@@ -30,6 +30,8 @@ function AllSchedulesPage() {
       <br></br>
       Z_ContactMeFooter -> https://localhost:9000/sentEmails 
       <br></br>
+      YOUR_BACKEND_ENDPOINT for fetch of schedules
+      <br></br>
       I can probably send json payload by military time, 12hour or 24 hour, whole original date object or whatever ... dont think sanitzing it will take too much? think its pretty easy
 
   

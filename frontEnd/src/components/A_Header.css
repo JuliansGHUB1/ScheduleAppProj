@@ -9,18 +9,6 @@
     position: relative; /* Add position relative to enable absolute positioning of the icon */
 }
 
-.header::before {
-    content: ''; /* Required content property for pseudo-elements */
-    display: block; /* Ensure the pseudo-element is displayed as a block */
-    width: 20px; /* Set the width of the icon */
-    height: 20px; /* Set the height of the icon */
-    background-image: url('../../public/logo192.png'); /* Set the icon as the background image */
-    background-size: cover; /* Ensure the background image covers the entire pseudo-element */
-    position: absolute; /* Position the pseudo-element absolutely within the header */
-    top: 10px; /* Position the pseudo-element 10px from the top */
-    left: 10px; /* Position the pseudo-element 10px from the left */
-    animation: spin 2s linear infinite; /* Apply the spin animation */
-}
 
 .header h1 {
     margin: 0;
