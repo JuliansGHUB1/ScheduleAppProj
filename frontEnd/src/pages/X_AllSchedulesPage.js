@@ -10,6 +10,7 @@ function AllSchedulesPage() {
         <li>maybe get rid of weekends</li>
         <li>maybe get rid of the numbers on weekdays?</li>
         <li>Handling usage by different timezones</li>
+        <li>MWF or TT only or no fridays ; just click a button </li>
         {/*Ngl rather icky. We'll have to alter what they seeon calendar, alter what they put in, and then display it right, and send it right or something ... prob unnecesssary ngl */}
         <li> synchornize styling</li>
       </ul>
@@ -31,6 +32,7 @@ function AllSchedulesPage() {
       <br></br>
       I can probably send json payload by military time, 12hour or 24 hour, whole original date object or whatever ... dont think sanitzing it will take too much? think its pretty easy
 
+  
       <br></br>      <br></br>      <br></br>
       # Untracked files:
 #	../node_modules/@types/lodash.memoize/
