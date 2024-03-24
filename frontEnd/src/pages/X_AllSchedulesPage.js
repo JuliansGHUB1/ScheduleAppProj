@@ -16,6 +16,7 @@ function AllSchedulesPage() {
       </ul>
       <h2>(notes)</h2>
       <li>When they send their classes, prob how it looks on wiser cart + how it looks on calendar they submitted</li>
+      <li>yknow, it would be interesting if we had a "Did you know" in the loading section when stuff is loading haha ... they wait for their schedule and they stare at our 100 ad for professors</li>
       <ul>
         <li></li>
         
