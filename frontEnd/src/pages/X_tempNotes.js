@@ -23,13 +23,13 @@ function AllSchedulesPage() {
       </ul>
       <h2>(endPoints)</h2>
 
-      ClassFormByManual -> http://localhost:9000/sentClasses>
+      ClassFormByManual => http://localhost:9000/sentClasses>
       <br></br>
-      ClassFormByFile -> http://localhost:9000/degreeAudit
+      ClassFormByFile => http://localhost:9000/degreeAudit
       <br></br>
-      TimeForm -> http://localhost:9000/sentTimes
+      TimeForm => http://localhost:9000/sentTimes
       <br></br>
-      Z_ContactMeFooter -> https://localhost:9000/sentEmails 
+      Z_ContactMeFooter => https://localhost:9000/sentEmails 
       <br></br>
       YOUR_BACKEND_ENDPOINT for fetch of schedules
       <br></br>

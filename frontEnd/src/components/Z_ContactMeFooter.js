@@ -29,6 +29,8 @@ function ContactMeFooter() {
     <section id="contact">
       <h2>Contact Me</h2>
       <p>Feel free to reach out to me with any questions, comments, or inquiries!</p>
+      <p>Directly emailing Duksing.Chau001@umb.edu or chauduksing2@gmail.com is fine too</p>
+      {/* contact forms are to hide your email haha*/}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name:</label>

@@ -73,7 +73,7 @@ form button:hover {
 .custom-spinner {
   width: 10vw; /* 10% of the viewport width */
   height: 10vh; /* 10% of the viewport height */
-  animation: spin 1s linear infinite;
+  animation: spin 5s linear infinite;
  }
  
  @keyframes spin {

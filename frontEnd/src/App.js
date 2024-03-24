@@ -9,7 +9,7 @@ import TimeSubmission from './pages/B_TimeForm';
 import HelpSection from './pages/C_HelpSection';
 
 import SchedulePage from './pages/X_SchedulePage';
-import AllSchedulesPage from './pages/X_AllSchedulesPage';
+import AllSchedulesPage from './pages/X_tempNotes';
 
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
           <Route path="/degreeAudit" element={<ClassSubmissionByFile />} />
           <Route path = "/TimeForm" element = {<TimeSubmission/>}/>
           <Route path="/help" element={<HelpSection />} />
-          <Route path="/all-schedules" element={<AllSchedulesPage />} />
+          <Route path="/tempNotes" element={<AllSchedulesPage />} />
           <Route path="/schedule/" element={<SchedulePage />} />
         </Routes>
       </div>
