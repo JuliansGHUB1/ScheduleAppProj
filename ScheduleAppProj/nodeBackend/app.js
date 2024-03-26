@@ -81,7 +81,20 @@ async function scrapeForCourses(url) {
     links.each((index, element) => {
       const courseName = $(element).text().trim(); // Get the text of the anchor tag (Major name)
       const linkToCourse = $(element).attr('href'); // Get the href attribute value (the link)
-      
+
+      // Paterns that match to invalid courseNames. The last pattern
+      // matches to 20 followed by two decimal numbers followed by space followed by wildcard
+      // This is matching to things like 2024 Spring, 2024 Fall which are not valid courses for any given major
+      // but they exist in anchor tags under div with unit-50 as class 
+      const patterns = [/UGRD/, /GRAD/, /^20\d{2}\s(Spring|Fall|Summer|Winter)$/];
+
+      isValidCourse = !patterns.some(pattern => pattern.test(courseName));
+
+    
+
+
+      // Only if its a valid course (not "UGRD" "GRAD" OR "20XX ____..." do we add it to the major's course array)
+      if(isValidCourse){
       // Make the instance of this course using the schema
       const courseInst = {
           name: courseName,
@@ -90,6 +103,7 @@ async function scrapeForCourses(url) {
 
       console.log(courseInst);
       emptyCourseArray.push(courseInst);
+      }
     });
   } catch (error) {
     console.log('Error scraping website:', error.message);

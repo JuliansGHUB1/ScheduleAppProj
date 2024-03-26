@@ -20,7 +20,11 @@ function ClassForm() {
 
  useEffect(() => {
     if (selectedMajor) {
-      fetch(`http://localhost:9000/major/${selectedMajor}`)
+
+      // Because potentially we can have the major be "Accounting/Finance", the / will be problematic in the url
+      // So we must encode first
+      const encodedMajor = encodeURIComponent(selectedMajor);
+      fetch(`http://localhost:9000/major/${encodedMajor}`)
         .then(response => response.json())
         .then(data => setClasses(data))
         .catch(error => console.error('Error fetching classes: ', error));
