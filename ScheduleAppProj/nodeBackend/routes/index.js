@@ -32,9 +32,10 @@ router.get('/major/:major', async function(req, res){
 
     // Isolate the major in question
     const major = req.params.major;
-    console.log("We have recieved a get request with the major: ", major);
+    const decodedMajor = decodeURIComponent(major);
+    console.log("We have recieved a get request with the major: ", decodedMajor);
     // Call some controller function that will obtain the courses pertaining to this major from database
-    const courses = await getCourses(major);
+    const courses = await getCourses(decodedMajor);
     console.log(courses);
 
     // Send the array of courses pertaining to this major to client
