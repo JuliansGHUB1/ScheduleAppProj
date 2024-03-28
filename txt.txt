@@ -1,0 +1,4 @@
+FrontEndToDo
+blend events together
+remove multiday events
+... set up fetching of schedules

@@ -5,23 +5,25 @@ import moment from 'moment';
 import './B_TimeForm.css';
 import axios from 'axios';
 
-// Create a localizer using moment
+// Create a localizer using moment - outside so it doesn't redo upon re-render
 const localizer = momentLocalizer(moment);
 
 
 function TimeForm() {
-
+  // stores events shown on calendar
  const [myEvents, setEvents] = useState([]);
+ // stores currently selectedEvent
  const [selectedEvent, setSelectedEvent] = useState(null);
+ // stores loading state
  const [isLoading, setIsLoading] = useState(false);
 
- // Define deleteEvent first
+ // function: delEvent
  const deleteEvent = useCallback((id) => {
     setEvents((prev) => prev.filter((event) => event.id !== id));
- }, []);
-
+ }, []
+ );
+ // function: handles selection of timeslot
  const handleSelectSlot = useCallback(
-
     ({ start, end }) => {
       const _2ndStart = moment(start).format('dddd, h:mm A');
       const _2ndEnd = moment(end).format('dddd, h:mm A');
@@ -36,7 +38,7 @@ function TimeForm() {
     },
     [setEvents]
  );
-
+ // function: handles selection of event -> delete
  const handleSelectEvent = useCallback(
     (event) => {
       setSelectedEvent(event);
@@ -47,29 +49,7 @@ function TimeForm() {
     },
     [deleteEvent] // Ensure deleteEvent is listed as a dependency
  );
-/*
- const handleSendToBackend = useCallback(() => {
-    setIsLoading(true);
-    axios.post('http://localhost:9000/saveEvents', { events: myEvents })
-      .then(response => {
-        console.log('Events sent to backend successfully:', response.data);
-        setIsLoading(false);
-      })
-      .catch(error => {
-        console.error('Error sending events to backend:', error);
-        setIsLoading(false);
-      });
- }, [myEvents]);*/
-
-/*
-This converts
-        start: new Date(2023, 0, 2, 14, 0), 
-        end: new Date(2023, 0, 2, 15, 0),
-      To
-        start: "Sunday, 09:00",
-        end: "10:00"
-      
-*/
+ // function-buttonForUpdate: send events
  const handleSendToBackend = useCallback(() => {
   setIsLoading(true);
 
@@ -90,12 +70,13 @@ This converts
           console.error('Error sending events to backend:', error);
           setIsLoading(false);
       });
-}, [myEvents]);
-
-
+}, [myEvents]
+);
+// (test) useEffect: for viewing what event array looks like
  useEffect(() => {
   console.log(myEvents);
-}, [myEvents]);
+}, [myEvents]
+);
 
  return (
   <div>
@@ -131,12 +112,6 @@ This converts
  );}
 
  export default TimeForm;
-// testing performances of animation
-/*const handleSendToBackend = () => {
-  setIsLoading(true); // Set loading to true at the beginning
-  setTimeout(() => {
-    setIsLoading(false);
-  }, 5000)
- };*/
+
 
 

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 const DataFetcher = () => {
+  // data: contains json payload
   const [data, setData] = useState(null);
+  // loading: contains loading state
   const [loading, setLoading] = useState(true);
-
+  // function: fetches data from backend
   const fetchData = async () => {
     setLoading(true);
     try {
@@ -16,11 +18,12 @@ const DataFetcher = () => {
       setLoading(false);
     }
   };
-
+  // useEffect: runs fetchData function on initial component mount
   useEffect(() => {
     fetchData(); // Initial fetch
-  }, []); // Runs only once on component mount
-
+  }, []
+  ); 
+  // function: handle refresh of page -> fetch data again
   const handleRefresh = () => {
     fetchData(); // Manually trigger data refresh
   };

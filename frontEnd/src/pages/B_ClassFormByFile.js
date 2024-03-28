@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import './B_ClassFormByFile.css'
 
 const FileUpload = () => {
+  // state variable to hold selectedFile
  const [selectedFile, setSelectedFile] = useState(null);
+ // state variable to check state of loading / not loading
  const [isLoading, setIsLoading] = useState(false);
 
-
+// event: when they select a file
  const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
  };
-
+// event: they click the upload button
  const handleUpload = () => {
     if (!selectedFile) {
       alert('Please select a file to upload.');
@@ -43,7 +45,7 @@ const FileUpload = () => {
      <div className="file-upload-container">
        <input type="file" onChange={handleFileChange} />
        <button onClick={handleUpload}>Update</button>
-       {/* Loading indicator */}
+       {/* When loading, plays animation */}
        {isLoading && (
          <div className="spinner-container">
            <div className="spinner"></div>
