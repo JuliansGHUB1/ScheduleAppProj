@@ -23,21 +23,62 @@ function TimeForm() {
  }, []
  );
  // function: handles selection of timeslot
- const handleSelectSlot = useCallback(
-    ({ start, end }) => {
-      const _2ndStart = moment(start).format('dddd, h:mm A');
-      const _2ndEnd = moment(end).format('dddd, h:mm A');
-      const userIsSure = window.confirm(`Are you sure of this time?\n\nStart: ${_2ndStart}\nEnd: ${_2ndEnd}`);
-      if (userIsSure) {
-        // prev is an array
-        setEvents((prev) => [
-          ...prev,
-          { id: prev.length, start, end },
-        ]);
+ const handleSelectSlot = useCallback(({ start, end }) => {
+  const _2ndStart = moment(start).format('dddd, h:mm A');
+  const _2ndEnd = moment(end).format('dddd, h:mm A');
+  const userIsSure = window.confirm(`Are you sure of this time?\n\nStart: ${_2ndStart}\nEnd: ${_2ndEnd}`);
+  if (userIsSure) {
+    // Merge overlapping events
+    const updatedEvents = [...myEvents];
+    let eventMerged = false;
+
+    for (let i = 0; i < updatedEvents.length; i++) {
+      const oldEvent = updatedEvents[i];
+      const oldEventStart = moment(oldEvent.start);
+      const oldEventEnd = moment(oldEvent.end);
+
+      // Case 1: New event is completely inside the old event
+      if (oldEventStart.isSameOrBefore(start) && oldEventEnd.isSameOrAfter(end)) {
+        // Merge the events
+        oldEvent.start = oldEvent.start;
+        oldEvent.end = oldEvent.end;
+        eventMerged = true;
+        break;
       }
-    },
-    [setEvents]
- );
+      // Case 2: Old event is completely inside the new event
+      else if (moment(start).isSameOrBefore(oldEventStart) && moment(end).isSameOrAfter(oldEventEnd)) {
+        // Replace the old event with the new event
+        oldEvent.start = start;
+        oldEvent.end = end;
+        eventMerged = true;
+        break;
+      }
+      // Case 3: New event ends inside old event
+      else if (moment(end).isAfter(oldEventStart) && moment(end).isBefore(oldEventEnd)) {
+        // Extend the old event
+        oldEvent.end = end;
+        eventMerged = true;
+        break;
+      }
+      // Case 4: Old event ends inside new event
+      else if (oldEventStart.isAfter(start) && oldEventStart.isBefore(end)) {
+        // Extend the old event
+        oldEvent.start = start;
+        eventMerged = true;
+        break;
+      }
+    }
+
+    if (!eventMerged) {
+      // If no overlap, add as a new event
+      updatedEvents.push({ id: myEvents.length, start, end });
+    }
+
+    // Update state with merged or new event
+    setEvents(updatedEvents);
+  }
+}, [myEvents, setEvents]);
+
  // function: handles selection of event -> delete
  const handleSelectEvent = useCallback(
     (event) => {
