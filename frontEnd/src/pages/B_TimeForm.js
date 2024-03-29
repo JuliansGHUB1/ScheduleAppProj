@@ -12,8 +12,6 @@ const localizer = momentLocalizer(moment);
 function TimeForm() {
   // stores events shown on calendar
  const [myEvents, setEvents] = useState([]);
- // stores currently selectedEvent
- const [selectedEvent, setSelectedEvent] = useState(null);
  // stores loading state
  const [isLoading, setIsLoading] = useState(false);
 
@@ -88,7 +86,6 @@ function TimeForm() {
  // function: handles selection of event -> delete
  const handleSelectEvent = useCallback(
     (event) => {
-      setSelectedEvent(event);
       // Show a confirmation dialog to delete the event
       if (window.confirm(`Do you want to delete the event: ${event.title}?`)) {
         deleteEvent(event.id);
