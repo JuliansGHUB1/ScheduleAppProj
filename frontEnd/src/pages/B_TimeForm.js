@@ -104,10 +104,11 @@ function TimeForm() {
   // Create a new array of events with formatted start and end times
   const formattedEvents = myEvents.map(event => ({
       ...event,
-      start: moment(event.start).format('dddd, HH:mm'),
-      end: moment(event.end).format('dddd, HH:mm'),
+      start: moment(event.start).format('ddd, HH'),
+      end: moment(event.end).format('ddd, HH'),
   }));
-
+  // see: what are we actually sending
+  console.log('Formatted events payload:', { events: formattedEvents });
   // Send the formatted events to the backend
   axios.post('http://localhost:9000/sentTimes', { events: formattedEvents })
       .then(response => {

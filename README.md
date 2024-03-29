@@ -1,1 +1,1 @@
-![Capture](https://github.com/JuliansGHUB1/ScheduleAppProj/assets/107665002/9c60c093-a41a-4f26-b493-1fd2cedbf27a)
+![Capture](https://github.com/JuliansGHUB1/ScheduleAppProj/assets/107665002/d189c266-a4f7-4e61-a131-4da4e76a724d)
