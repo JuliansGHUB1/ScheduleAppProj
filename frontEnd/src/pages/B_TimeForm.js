@@ -22,6 +22,10 @@ function TimeForm() {
  );
  // function: handles selection of timeslot
  const handleSelectSlot = useCallback(({ start, end }) => {
+  // handleCase: prevent pre-day slots + multidays
+  if (moment(start).startOf('day').isSame(start)) {
+    return;
+  }
   const _2ndStart = moment(start).format('dddd, h:mm A');
   const _2ndEnd = moment(end).format('dddd, h:mm A');
   const userIsSure = window.confirm(`Are you sure of this time?\n\nStart: ${_2ndStart}\nEnd: ${_2ndEnd}`);
