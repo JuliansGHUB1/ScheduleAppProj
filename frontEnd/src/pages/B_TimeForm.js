@@ -22,6 +22,13 @@ function TimeForm() {
  );
  // function: handles selection of timeslot
  const handleSelectSlot = useCallback(({ start, end }) => {
+  // handleCase: prevent selection of sat + sunday
+  const startDay = moment(start).day();
+  const endDay = moment(end).day();
+  if (startDay === 0 || startDay === 6 || endDay === 0 || endDay === 6) {
+    window.alert('Events cannot be scheduled on Sundays or Saturdays.');
+    return; // Exit the function early
+ }
   // handleCase: prevent pre-day slots + multidays
   if (moment(start).startOf('day').isSame(start)) {
     return;
